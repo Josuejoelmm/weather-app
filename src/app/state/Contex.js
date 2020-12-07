@@ -1,12 +1,13 @@
-import React, { useState, useEffect ,useReducer, useMemo } from 'react';
+import React, { useEffect ,useReducer, useMemo } from 'react';
 import reducer from './reducer';
-import { getCurrentWeather, getForecast } from './actions';
-import { ACTIONS } from './actions';
+import { getWeatherData , ACTIONS } from './actions';
 
 const initialState = {
     isLoading: false,
     currentWeather: {},
-    forecast: []
+    forecast: [],
+    fetchError: false,
+    city: ''
 };
 
 const GlobalContext = React.createContext();
@@ -15,20 +16,10 @@ function GlobalProvider(props) {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        getCurrentWeather()
+        getWeatherData()
             .then(data => {
-                dispatch({
-                    type: ACTIONS.SET_CURRENT_WH,
-                    data
-                })
+                dispatch({type: ACTIONS.SET_APP_DATA, data})
             });
-        getForecast()
-        .then(data => {
-            dispatch({
-                type: ACTIONS.SET_FORECAST,
-                data
-            })
-        });
     }, [])
 
     

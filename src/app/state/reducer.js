@@ -6,18 +6,24 @@ const reducer = (state, action) => {
         case ACTIONS.SET_LOADING:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                currentWeather: {},
+                forecast: [],
+                fetchError: false
             }
-        case ACTIONS.SET_CURRENT_WH:
+        case ACTIONS.SET_APP_DATA:
+            if (action.data && action.data.weatherResponse) {
+                return {
+                    ...state,
+                    currentWeather: action.data.weatherResponse,
+                    forecast: filterForecast(action.data.forecastResponse.list),
+                    isLoading: false,
+                    city: action.data.city
+                }
+            }
             return {
                 ...state,
-                currentWeather: action.data,
-                isLoading: false
-            }
-        case ACTIONS.SET_FORECAST:
-            return {
-                ...state,
-                forecast: filterForecast(action.data.list),
+                fetchError: true,
                 isLoading: false
             }
         default:

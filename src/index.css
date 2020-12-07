@@ -5,9 +5,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #429DB4 !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.mar-b-mob {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 576px) {
+  .mar-b-mob {
+      margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 360px) {
+  .extra-small-t {
+      font-size: 14px !important;
+  }
 }
