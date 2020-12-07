@@ -1,4 +1,5 @@
 import axios from '../helper/axios';
+import regAxios from 'axios';
 
 export const ACTIONS = {
     SET_LOADING: 'SET_LOADING',
@@ -12,7 +13,7 @@ export const getWeatherData = async (query) => {
         let responseGeo = '';
         if (!query) {
             // GET CURRENT LOCATION
-            const fetchGeo = await axios.get('http://ip-api.com/json/')
+            const fetchGeo = await regAxios.get('http://ip-api.com/json/')
             responseGeo = fetchGeo.data;
         }
 
